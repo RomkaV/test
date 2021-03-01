@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "nginx-stock.fullname" . }}
+  labels:
+    app: {{ template "nginx-stock.name" . }}
+    chart: {{ template "nginx-stock.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  default.conf: |-
+{{ include (print $.Template.BasePath "/conf/_default.conf") . | indent 4 }}
